@@ -1,0 +1,53 @@
+{
+    "model_name": "Random Forest",
+    "model_type": "RandomForestRegressor",
+    "training_date": "2025-09-12 15:02:22",
+    "performance_metrics": {
+        "MSE": 7.912745333333333,
+        "RMSE": 2.8129602438238144,
+        "R2": 0.8920995891343227
+    },
+    "feature_names": [
+        "CRIM",
+        "ZN",
+        "INDUS",
+        "CHAS",
+        "NOX",
+        "RM",
+        "AGE",
+        "DIS",
+        "RAD",
+        "TAX",
+        "PTRATIO",
+        "B",
+        "LSTAT"
+    ],
+    "target_variable": "MEDV",
+    "dataset_shape": {
+        "original": [
+            506,
+            14
+        ],
+        "processed": [
+            506,
+            14
+        ]
+    },
+    "data_file": "../../data/raw/house Prediction Data Set.csv",
+    "column_names": [
+        "CRIM",
+        "ZN",
+        "INDUS",
+        "CHAS",
+        "NOX",
+        "RM",
+        "AGE",
+        "DIS",
+        "RAD",
+        "TAX",
+        "PTRATIO",
+        "B",
+        "LSTAT",
+        "MEDV"
+    ]
+}
