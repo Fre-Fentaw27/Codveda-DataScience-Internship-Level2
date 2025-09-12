@@ -1,0 +1,37 @@
+{
+    "model_name": "SVM",
+    "model_type": "SVC",
+    "training_date": "2025-09-12 16:06:17",
+    "performance_metrics": {
+        "Accuracy": 0.9666666666666667,
+        "Precision": 0.9696969696969696,
+        "Recall": 0.9666666666666667,
+        "F1-Score": 0.9665831244778613
+    },
+    "feature_names": [
+        "sepal_length",
+        "sepal_width",
+        "petal_length",
+        "petal_width"
+    ],
+    "target_classes": [
+        "setosa",
+        "versicolor",
+        "virginica"
+    ],
+    "class_encoding": {
+        "0": "setosa",
+        "1": "versicolor",
+        "2": "virginica"
+    },
+    "dataset_shape": {
+        "original": [
+            150,
+            5
+        ],
+        "processed": [
+            150,
+            5
+        ]
+    }
+}
