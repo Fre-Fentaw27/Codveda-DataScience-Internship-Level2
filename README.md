@@ -8,8 +8,7 @@ This repository contains my solutions for the Level 2 Data Science Internship ta
 
 ## 📂 Project Structure
 
-```
-bash
+```bash
 Codveda-DataScience-Internship-Level2/
 │
 ├── data/
@@ -25,19 +24,10 @@ Codveda-DataScience-Internship-Level2/
 ├── src/
 │   ├── task_1_regression/
 │   │   ├── house_price_prediction.py
-│   │   ├── predict.py
-│   │   ├── house_visualization.ipynb
-│   │   ├── model_analysis.ipynb
 │   ├── task_2_classification/
 │   │   ├── iris_classification.py
-│   │   ├── predict.py
-│   │   ├── iris_visualization.ipynb
-│   │   ├── model_analysis.ipynb
 │   └── task_3_clustering/
 │       ├── customer_segmentation.py
-│       ├── clustering_analysis.py
-│       ├── clustering_visualization.ipynb
-│       ├── model_analysis.ipynb
 ├── models/
 │   ├── task_1_regression/
 │   │   ├── best_model.pkl
@@ -92,9 +82,9 @@ Codveda-DataScience-Internship-Level2/
 
 ## Task 1: Predictive Modeling (Regression)
 
-- **Description**: Built and evaluated regression models to predict house prices using the Boston Housing dataset.
+**Description**: Built and evaluated regression models to predict house prices using the Boston Housing dataset.
 
-- **Objectives Achieved**:
+**Objectives Achieved**:
 
 ✅ Data preprocessing and exploratory analysis
 
@@ -106,13 +96,13 @@ Codveda-DataScience-Internship-Level2/
 
 ✅ Model serialization for future use
 
-- **Key Results**: Random Forest achieved the best performance with R² = 0.85
+**Key Results**: Random Forest achieved the best performance with R² = 0.85
 
 ## Task 2: Classification with Logistic Regression
 
-- **Description**: Built multiple classifiers to predict iris flower species using the classic Iris dataset.
+**Description**: Built multiple classifiers to predict iris flower species using the classic Iris dataset.
 
-- **Objectives Achieved**:
+**Objectives Achieved**:
 
 ✅ Data preprocessing and visualization
 
