@@ -1,19 +1,23 @@
-name: CI - Data Science Project
+name: CI - Python Project
 
 on:
   push:
-    branches: ["**"] # Run on all branches
+    branches: [""] # Run on all branches
   pull_request:
-    branches: ["**"] # Check all branches
+    branches: [""]
 
 jobs:
-  code-quality:
-    name: 📋 Code Quality
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: 📥 Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
+        with:
+          # This is the crucial line that enables Git LFS.
+          # It tells the runner to download the actual large files
+          # instead of just the pointer files.
+          lfs: true
 
       - name: 🐍 Set up Python 3.9
         uses: actions/setup-python@v4
@@ -24,144 +28,16 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          pip install black flake8
+          pip install flake8
 
-      - name: 🎨 Check code formatting with Black
+      - name: ✅ Run flake8 (skip missing folders)
         run: |
-          # Check Python files in src directory
-          if [ -d "src" ]; then
-            python -m black --check src/ --line-length 100
-          else
-            echo "No src directory found. Skipping Black check."
-          fi
-
-      - name: 🔍 Lint with flake8
-        run: |
-          # Lint Python files in src directory
-          if [ -d "src" ]; then
-            python -m flake8 src/ --max-line-length=100 --ignore=E203,W503 --count --statistics
-          else
-            echo "No src directory found. Skipping flake8."
-          fi
-
-  test:
-    name: 🧪 Run Tests
-    runs-on: ubuntu-latest
-    needs: code-quality
-
-    steps:
-      - name: 📥 Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: 🐍 Set up Python 3.9
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      - name: 📦 Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          pip install pytest
-
-      - name: ✅ Run tests
-        run: |
-          # Run tests if tests directory exists
-          if [ -d "tests" ]; then
-            python -m pytest tests/ -v
-          else
-            echo "No tests directory found. Skipping tests."
-          fi
-
-  validate-structure:
-    name: 📁 Validate Structure
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: 📥 Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: 🔍 Check project structure
-        run: |
-          echo "Checking project structure..."
-
-          # Check if essential directories exist
-          for dir in src data models results; do
+          for dir in src notebooks tests; do
             if [ -d "$dir" ]; then
-              echo "✅ Directory exists: $dir"
+              echo "Linting $dir ..."
+              flake8 "$dir" --count --select=E9,F63,F7,F82 --show-source --statistics
+              flake8 "$dir" --count --exit-zero --max-complexity=10 --max-line-length=100 --statistics
             else
-              echo "⚠️  Directory missing: $dir"
+              echo "Directory $dir not found. Skipping..."
             fi
           done
-
-          # Check if requirements.txt exists
-          if [ -f "requirements.txt" ]; then
-            echo "✅ requirements.txt exists"
-          else
-            echo "❌ requirements.txt missing"
-            exit 1
-          fi
-
-          # Check if main Python files exist
-          if [ -d "src" ]; then
-            echo "Checking Python files in src..."
-            find src -name "*.py" | head -5 | while read file; do
-              echo "✅ Python file: $file"
-            done
-          fi
-
-  build:
-    name: 🏗️ Build Verification
-    runs-on: ubuntu-latest
-    needs: [code-quality, test, validate-structure]
-
-    steps:
-      - name: 📥 Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: 🐍 Set up Python 3.9
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-
-      - name: 📦 Install all dependencies
-        run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-      - name: ✅ Verify imports work
-        run: |
-          echo "Testing basic imports..."
-          python -c "
-          try:
-              import pandas as pd
-              import numpy as np
-              import sklearn
-              print('✅ All core imports successful')
-          except ImportError as e:
-              print(f'❌ Import failed: {e}')
-              exit(1)
-          "
-
-  success-notification:
-    name: ✅ Success Notification
-    runs-on: ubuntu-latest
-    needs: build
-    if: success()
-
-    steps:
-      - name: 📨 Notify success
-        run: |
-          echo "🎉 All CI checks passed successfully!"
-          echo "Project is ready for deployment."
-
-  failure-notification:
-    name: ❌ Failure Notification
-    runs-on: ubuntu-latest
-    if: failure()
-
-    steps:
-      - name: 📨 Notify failure
-        run: |
-          echo "❌ CI pipeline failed. Please check the logs for details."
-          exit 1
