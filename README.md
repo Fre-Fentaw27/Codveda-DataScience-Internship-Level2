@@ -114,13 +114,13 @@ Codveda-DataScience-Internship-Level2/
 
 ✅ Model comparison and selection
 
-- **Key Results**: All models achieved >95% accuracy, with Random Forest performing best
+**Key Results**: All models achieved >95% accuracy, with Random Forest performing best
 
-## Clustering (Unsupervised Learning)
+## Task 3: Clustering (Unsupervised Learning)
 
-- **Description**: Implemented K-Means clustering for customer segmentation using telecom churn data.
+**Description**: Implemented K-Means clustering for customer segmentation using telecom churn data.
 
-- **Objectives Achieved**:
+**Objectives Achieved**:
 
 ✅ Data preprocessing and dimensionality reduction
 
@@ -132,7 +132,7 @@ Codveda-DataScience-Internship-Level2/
 
 ✅ Customer segmentation analysis
 
-- **Key Results**: Identified 9 distinct customer segments with unique characteristics
+**Key Results**: Identified 9 distinct customer segments with unique characteristics
 
 ## 🛠️ Setup & Installation
 
