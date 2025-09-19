@@ -2,9 +2,9 @@ name: CI - Python Project
 
 on:
   push:
-    branches: [""] # Run on all branches
+    branches: ["**"] # Run on all branches
   pull_request:
-    branches: [""]
+    branches: ["**"] # Check all branches
 
 jobs:
   validate-structure:
@@ -58,7 +58,7 @@ jobs:
           lfs: true
 
       - name: 🐍 Set up Python 3.9
-        uses: actions/setup-python@v4
+        uses: actions/supython@v4
         with:
           python-version: "3.9"
 
